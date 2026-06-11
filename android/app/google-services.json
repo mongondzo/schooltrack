@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "637535260189",
+    "project_id": "schooltrack-7b387",
+    "storage_bucket": "schooltrack-7b387.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637535260189:android:a14c4d8a632c5c60f5c0f4",
+        "android_client_info": {
+          "package_name": "com.EduNova.schooltrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "637535260189-trv07qbkr48725q93q6b5eob9l5ib5ot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChDv3GXnIgWCrrTLZyHil7AC0PTtzTpfM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "637535260189-trv07qbkr48725q93q6b5eob9l5ib5ot.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "637535260189-8ue1lnd6fu7c1vrbi43v0ip0qrg49em0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.EduNova.schooltrack"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
