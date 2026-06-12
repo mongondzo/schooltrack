@@ -1,18 +1,17 @@
 import 'package:go_router/go_router.dart';
 import 'package:schooltrack/features/auth/presentation/pages/login_with_google.dart';
-
-import '../../features/auth/presentation/bloc/splash_page.dart';
-import '../../features/auth/presentation/pages/home_page.dart';
-import '../../features/auth/presentation/pages/no_internet_page.dart';
-import '../../features/auth/presentation/pages/onboarding.dart';
+import 'package:schooltrack/features/auth/presentation/bloc/splash_page.dart';
+import 'package:schooltrack/features/auth/presentation/pages/home_page.dart';
+import 'package:schooltrack/features/auth/presentation/pages/no_internet_page.dart';
+import 'package:schooltrack/features/auth/presentation/pages/onboarding_screen.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/', // Démarre sur le SplashPage
   routes: [
     GoRoute(path: '/', builder: (context, state) => const SplashPage()),
     GoRoute(
       path: '/onboarding',
-      builder: (context, state) => const OnboardingPage(),
+      builder: (context, state) => const OnboardingScreen(),
     ),
     GoRoute(
       path: '/loginWithGoogle',
