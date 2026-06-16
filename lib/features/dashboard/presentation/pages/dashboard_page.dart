@@ -538,7 +538,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   },
                 ),
                 QuickActionButton(
-                  label: 'Annonce',
+                  label: 'Annonce\necole',
                   icon: Icons.campaign_rounded,
                   color: const Color(0xFFDC2626),
                   onTap: () {
