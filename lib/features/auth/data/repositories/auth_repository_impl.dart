@@ -1,44 +1,27 @@
-import '../../domain/entities/auth_user.dart';
-import '../../domain/repositories/auth_repository.dart';
-import '../services/firebase_auth_service.dart';
+import 'package:schooltrack/features/auth/data/data/auth_remote_datasource.dart';
+import 'package:schooltrack/features/auth/domain/entities/user_entity.dart';
+import 'package:schooltrack/features/auth/domain/repositories/auth_repository.dart';
 
+// Implémentation du repository d'authentification
+// Fait le lien entre le domaine et la source de données
 class AuthRepositoryImpl implements AuthRepository {
-  final FirebaseAuthService firebaseAuthServices;
+  final AuthRemoteDatasource remoteDatasource;
 
-  AuthRepositoryImpl(this.firebaseAuthServices);
-
-  @override
-  Future<AuthUser?> getCurrentUser() async {
-    final user = firebaseAuthServices.getUser();
-
-    if (user != null) {
-      return AuthUser(
-        id: user.uid,
-        email: user.email ?? '',
-        name: user.displayName ?? '',
-        imageUrl: user.photoURL ?? '',
-      );
-    }
-    return null;
-  }
+  AuthRepositoryImpl({required this.remoteDatasource});
 
   @override
-  Future<AuthUser?> signIn(String email, String password) async {
-    return await firebaseAuthServices.signIn(email, password);
-  }
-
-  @override
-  Future<void> signUp(String email, String password, String name) async {
-    await firebaseAuthServices.signUp(email, password, name);
-  }
-
-  @override
-  Future<AuthUser?> signInWithGoogle() async {
-    return await firebaseAuthServices.signInWithGoogle();
+  Future<UserEntity> signInWithGoogle() async {
+    // Délègue au datasource et retourne l'entité
+    return await remoteDatasource.signInWithGoogle();
   }
 
   @override
   Future<void> signOut() async {
-    await firebaseAuthServices.signOut();
+    return await remoteDatasource.signOut();
+  }
+
+  @override
+  Future<UserEntity?> getCurrentUser() async {
+    return await remoteDatasource.getCurrentUser();
   }
 }

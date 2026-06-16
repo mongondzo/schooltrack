@@ -1,11 +1,14 @@
-import '../entities/auth_user.dart';
+import 'package:schooltrack/features/auth/domain/entities/user_entity.dart';
 
+// Interface du dépôt d'authentification - couche domaine
+// Le domaine définit CE QU'ON VEUT faire, sans savoir COMMENT c'est fait
 abstract class AuthRepository {
-  //creation de l'interface AuthRepository avec
-  //les méthodes signIn, signUp , signOut , singninWithGoogle et getCurrentUser
-  Future<AuthUser?> signIn(String email, String password);
-  Future<void> signUp(String email, String password, String name);
-  Future<AuthUser?> signInWithGoogle();
+  // Connexion avec Google
+  Future<UserEntity> signInWithGoogle();
+
+  // Déconnexion
   Future<void> signOut();
-  Future<AuthUser?> getCurrentUser();
+
+  // Récupère l'utilisateur actuellement connecté (null si non connecté)
+  Future<UserEntity?> getCurrentUser();
 }

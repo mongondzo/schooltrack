@@ -1,130 +1,73 @@
-// bloc pour la gestion de l'authentification
-
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/repositories/auth_repository.dart';
-import 'auth_event.dart';
-import 'auth_state.dart';
+import 'package:schooltrack/features/auth/domain/entities/user_entity.dart';
+import 'package:schooltrack/features/auth/domain/usecases/sign_in_with_google.dart';
+import 'package:schooltrack/features/auth/domain/usecases/sign_out.dart';
+import 'package:schooltrack/features/auth/presentation/bloc/auth_event.dart';
+import 'package:schooltrack/features/auth/presentation/bloc/auth_state.dart';
 
+// AuthBloc : cerveau de l'authentification
+// Il écoute les Events et émet des States en réponse
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepository authRepository;
-  AuthBloc(this.authRepository) : super(AuthInitialState()) {
-    // separe les fonctions de chaque event dans des fonctions privées
-    on<AuthInitialEvent>(onAuthInitial);
-    on<AuthLoginEvent>(onAuthLogin);
-    on<AuthSignUpEvent>(onAuthSignUp);
-    on<AuthSignInWithGoogleEvent>(onAuthSignInWithGoogle);
-    on<AuthSignOutEvent>(onAuthSignOutEvent);
-    on<AuthCheckConnectionEvent>(onAuthCheckConnection);
+  final SignInWithGoogle signInWithGoogle;
+  final SignOut signOut;
+
+  AuthBloc({required this.signInWithGoogle, required this.signOut})
+    : super(AuthInitial()) {
+    // On enregistre un handler pour chaque type d'Event
+
+    // Vérification initiale de l'authentification
+    on<AuthCheckRequested>(_onAuthCheckRequested);
+
+    // Connexion avec Google
+    on<AuthGoogleSignInRequested>(_onGoogleSignInRequested);
+
+    // Déconnexion
+    on<AuthSignOutRequested>(_onSignOutRequested);
   }
 
-  Future<void> onAuthInitial(
-    AuthInitialEvent event,
+  // Handler : vérifie si l'utilisateur est déjà connecté
+  Future<void> _onAuthCheckRequested(
+    AuthCheckRequested event,
     Emitter<AuthState> emit,
   ) async {
-    emit(AuthLoadingState());
+    emit(AuthLoading()); // On affiche le chargement
 
     try {
-      final user = await authRepository.getCurrentUser();
-
-      if (user != null) {
-        emit(AuthAuthenticatedState(user));
-      } else {
-        emit(AuthUnauthenticatedState());
-      }
+      await Future.delayed(const Duration(seconds: 2));
+      emit(AuthUnauthenticated());
     } catch (e) {
-      emit(AuthErrorState(e.toString()));
+      emit(AuthUnauthenticated());
     }
   }
 
-  Future<void> onAuthLogin(
-    AuthLoginEvent event,
+  // Handler : connexion avec Google
+  Future<void> _onGoogleSignInRequested(
+    AuthGoogleSignInRequested event,
     Emitter<AuthState> emit,
   ) async {
-    emit(AuthLoadingState());
+    emit(AuthLoading()); // Indique qu'une opération est en cours
 
     try {
-      final user = await authRepository.signIn(event.email, event.password);
-
-      if (user != null) {
-        emit(AuthAuthenticatedState(user));
-      } else {
-        emit(AuthUnauthenticatedState());
-      }
+      final UserEntity user = await signInWithGoogle();
+      emit(AuthAuthenticated(user)); // Connexion réussie !
     } catch (e) {
-      emit(AuthErrorState(e.toString()));
+      // En cas d'erreur, on retourne à l'état non connecté avec le message
+      emit(AuthError(e.toString()));
     }
   }
 
-  Future<void> onAuthSignUp(
-    AuthSignUpEvent event,
+  // Handler : déconnexion
+  Future<void> _onSignOutRequested(
+    AuthSignOutRequested event,
     Emitter<AuthState> emit,
   ) async {
-    emit(AuthLoadingState());
+    emit(AuthLoading());
 
     try {
-      await authRepository.signUp(event.email, event.password, event.name);
-
-      // après signup on récupère l'utilisateur
-      final user = await authRepository.getCurrentUser();
-
-      if (user != null) {
-        emit(AuthAuthenticatedState(user));
-      } else {
-        emit(AuthUnauthenticatedState());
-      }
+      await signOut();
+      emit(AuthUnauthenticated()); // Déconnecté avec succès
     } catch (e) {
-      emit(AuthErrorState(e.toString()));
-    }
-  }
-
-  Future<void> onAuthSignInWithGoogle(
-    AuthSignInWithGoogleEvent event,
-    Emitter<AuthState> emit,
-  ) async {
-    emit(AuthLoadingState());
-
-    try {
-      final user = await authRepository.signInWithGoogle();
-
-      if (user != null) {
-        emit(AuthAuthenticatedState(user));
-      } else {
-        emit(AuthUnauthenticatedState());
-      }
-    } catch (e) {
-      emit(AuthErrorState(e.toString()));
-    }
-  }
-
-  Future<void> onAuthSignOutEvent(
-    AuthSignOutEvent event,
-    Emitter<AuthState> emit,
-  ) async {
-    emit(AuthLoadingState());
-    try {
-      await authRepository.signOut();
-      emit(AuthUnauthenticatedState());
-    } catch (e) {
-      emit(AuthErrorState(e.toString()));
-    }
-  }
-
-  Future<void> onAuthCheckConnection(
-    AuthCheckConnectionEvent event,
-    Emitter<AuthState> emit,
-  ) async {
-    emit(AuthLoadingState());
-    try {
-      final result = await Connectivity().checkConnectivity();
-      if (result.contains(ConnectivityResult.none)) {
-        emit(AuthCheckConnectionState());
-        emit(AuthErrorState("Pas de connexion Internet disponible"));
-      } else {
-        emit(AuthInitialState());
-      }
-    } catch (e) {
-      emit(AuthErrorState(e.toString()));
+      emit(AuthError(e.toString()));
     }
   }
 }

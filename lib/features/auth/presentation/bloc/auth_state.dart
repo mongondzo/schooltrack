@@ -1,22 +1,28 @@
-import '../../domain/entities/auth_user.dart';
+import 'package:schooltrack/features/auth/domain/entities/user_entity.dart';
 
 abstract class AuthState {}
 
-class AuthInitialState extends AuthState {}
+// Les States représentent l'état courant de l'authentification
 
-class AuthLoadingState extends AuthState {}
+// État initial : on ne sait pas encore si l'utilisateur est connecté
+class AuthInitial extends AuthState {}
 
-class AuthAuthenticatedState extends AuthState {
-  final AuthUser user;
+// État : vérification en cours (pendant le chargement)
+class AuthLoading extends AuthState {}
 
-  AuthAuthenticatedState(this.user);
+// État : l'utilisateur est connecté
+class AuthAuthenticated extends AuthState {
+  final UserEntity user; // L'utilisateur connecté
+
+  AuthAuthenticated(this.user);
 }
 
-class AuthUnauthenticatedState extends AuthState {}
+// État : l'utilisateur n'est PAS connecté
+class AuthUnauthenticated extends AuthState {}
 
-class AuthErrorState extends AuthState {
-  final String message;
-  AuthErrorState(this.message);
+// État : une erreur s'est produite
+class AuthError extends AuthState {
+  final String message; // Message d'erreur à afficher
+
+  AuthError(this.message);
 }
-
-class AuthCheckConnectionState extends AuthState {}

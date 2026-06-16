@@ -1,30 +1,11 @@
-// AuthInitialEvent, AuthLoginEvent, AuthSignUpEvent, AuthSignInWithGoogleEvent et autres événements liés à l'authentification
-
 abstract class AuthEvent {}
+// Les Events sont les actions que l'utilisateur ou l'app peut déclencher
 
-class AuthInitialEvent extends AuthEvent {}
+// Événement : vérifier si l'utilisateur est déjà connecté (au démarrage)
+class AuthCheckRequested extends AuthEvent {}
 
-class AuthLoginEvent extends AuthEvent {
-  final String email;
-  final String password;
+// Événement : l'utilisateur veut se connecter avec Google
+class AuthGoogleSignInRequested extends AuthEvent {}
 
-  AuthLoginEvent({required this.email, required this.password});
-}
-
-class AuthSignUpEvent extends AuthEvent {
-  final String email;
-  final String password;
-  final String name;
-
-  AuthSignUpEvent({
-    required this.email,
-    required this.password,
-    required this.name,
-  });
-}
-
-class AuthSignInWithGoogleEvent extends AuthEvent {}
-
-class AuthSignOutEvent extends AuthEvent {}
-
-class AuthCheckConnectionEvent extends AuthEvent {}
+// Événement : l'utilisateur veut se déconnecter
+class AuthSignOutRequested extends AuthEvent {}
