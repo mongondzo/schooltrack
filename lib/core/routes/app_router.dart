@@ -6,10 +6,12 @@ import 'package:schooltrack/features/auth/presentation/bloc/auth_state.dart';
 import 'package:schooltrack/features/auth/presentation/pages/login_page.dart';
 import 'package:schooltrack/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:schooltrack/features/splash/presentation/pages/splash_page.dart';
+import 'package:schooltrack/features/students/presentation/pages/student_list_page.dart';
+import 'package:schooltrack/features/students/student_dependencies.dart';
 
 // Classe qui centralise toutes les routes de l'application
 class AppRouter {
-  // Noms des routes (évite les fautes de frappe)
+  // Noms des routes (il faut eviter les fautes de frappe)
   static const String splash = '/';
   static const String login = '/login';
   static const String dashboard = '/dashboard';
@@ -65,6 +67,13 @@ class AppRouter {
         path: dashboard,
         name: 'dashboard',
         builder: (context, state) => const DashboardPage(),
+      ),
+
+      //4. Students
+      GoRoute(
+        path: '/students',
+        builder: (context, state) =>
+            StudentDependencies.provideBloc(child: const StudentListPage()),
       ),
     ],
 

@@ -3,10 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schooltrack/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:schooltrack/features/auth/presentation/bloc/auth_event.dart';
 import 'package:schooltrack/features/auth/presentation/bloc/auth_state.dart';
+import 'package:schooltrack/features/classes/presentation/pages/classes_page.dart';
 import 'package:schooltrack/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:schooltrack/features/dashboard/presentation/widgets/quick_action_button.dart';
 import 'package:schooltrack/features/dashboard/presentation/widgets/stat_card.dart';
 import 'package:schooltrack/features/dashboard/presentation/widgets/stats_skeleton_loader.dart';
+import 'package:schooltrack/features/students/presentation/pages/add_student_page.dart';
+import 'package:schooltrack/features/students/presentation/pages/student_list_page.dart';
+import 'package:schooltrack/features/students/student_dependencies.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -307,7 +311,16 @@ class _DashboardPageState extends State<DashboardPage> {
                       color: const Color(0xFF2563EB),
                       iconBgColor: const Color(0xFF1D4ED8),
                       subtitle: 'Voir plus',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => StudentDependencies.provideBloc(
+                              child: const StudentListPage(),
+                            ),
+                          ),
+                        );
+                      },
                     ),
 
                     // Carte Classes
@@ -319,7 +332,12 @@ class _DashboardPageState extends State<DashboardPage> {
                       iconBgColor: const Color(0xFF047857),
                       subtitle: 'Voir plus',
                       onTap: () {
-                        // TODO: Naviguer vers les classes
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const ClassesPage(),
+                          ),
+                        );
                       },
                     ),
 
@@ -516,7 +534,14 @@ class _DashboardPageState extends State<DashboardPage> {
                   icon: Icons.person_add_rounded,
                   color: const Color(0xFF2563EB),
                   onTap: () {
-                    // TODO: Naviguer vers ajout d'élève
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => StudentDependencies.provideBloc(
+                          child: const AddStudentPage(),
+                        ),
+                      ),
+                    );
                   },
                 ),
                 QuickActionButton(
@@ -524,7 +549,10 @@ class _DashboardPageState extends State<DashboardPage> {
                   icon: Icons.add_box_rounded,
                   color: const Color(0xFF059669),
                   onTap: () {
-                    // TODO: Naviguer vers ajout de classe
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const ClassesPage()),
+                    );
                   },
                 ),
                 QuickActionButton(
@@ -532,7 +560,10 @@ class _DashboardPageState extends State<DashboardPage> {
                   icon: Icons.edit_note_rounded,
                   color: const Color(0xFFD97706),
                   onTap: () {
-                    // TODO: Naviguer vers ajout de note
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const ClassesPage()),
+                    );
                   },
                 ),
                 QuickActionButton(

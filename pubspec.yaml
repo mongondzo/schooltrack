@@ -44,6 +44,9 @@ dependencies:
   connectivity_plus: ^7.1.1
   flutter_bloc: ^9.1.1
   smooth_page_indicator: ^2.0.1
+  intl: ^0.20.2
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
