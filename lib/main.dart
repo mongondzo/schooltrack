@@ -8,7 +8,7 @@ import 'package:schooltrack/features/auth/domain/usecases/sign_in_with_google.da
 import 'package:schooltrack/features/auth/domain/usecases/sign_out.dart';
 import 'package:schooltrack/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:schooltrack/features/auth/presentation/bloc/auth_event.dart';
-import 'package:schooltrack/features/dashboard/data/datasources/dashboard_remote_datasource.dart';
+import 'package:schooltrack/features/dashboard/data/data/dashboard_remote_datasource.dart';
 import 'package:schooltrack/features/dashboard/data/repositories/dashboard_repository_impl.dart';
 import 'package:schooltrack/features/dashboard/domain/usecases/get_dashboard_stats.dart';
 import 'package:schooltrack/features/dashboard/presentation/bloc/dashboard_bloc.dart';

@@ -173,8 +173,8 @@ class _DashboardPageState extends State<DashboardPage> {
           padding: const EdgeInsets.fromLTRB(20, 24, 20, 28),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10),
+              bottomLeft: Radius.circular(25),
+              bottomRight: Radius.circular(25),
             ),
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -215,11 +215,11 @@ class _DashboardPageState extends State<DashboardPage> {
                   _showLogoutMenu(context);
                 },
                 child: Container(
-                  width: 46,
-                  height: 46,
+                  width: 75,
+                  height: 75,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 2.5),
+                    border: Border.all(color: Colors.white, width: 2),
                     color: Colors.white.withOpacity(0.2),
                   ),
                   child: ClipOval(
@@ -296,8 +296,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisCount: 2,
                   mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                  childAspectRatio: 1.15,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 0.82,
                   children: [
                     // Carte Élèves
                     StatCard(
@@ -307,9 +307,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       color: const Color(0xFF2563EB),
                       iconBgColor: const Color(0xFF1D4ED8),
                       subtitle: 'Voir plus',
-                      onTap: () {
-                        // TODO: Naviguer vers la liste des élèves
-                      },
+                      onTap: () {},
                     ),
 
                     // Carte Classes

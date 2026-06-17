@@ -1,4 +1,4 @@
-import 'package:schooltrack/features/dashboard/data/datasources/dashboard_remote_datasource.dart';
+import 'package:schooltrack/features/dashboard/data/data/dashboard_remote_datasource.dart';
 import 'package:schooltrack/features/dashboard/domain/entities/dashboard_stats_entity.dart';
 import 'package:schooltrack/features/dashboard/domain/repositories/dashboard_repository.dart';
 
