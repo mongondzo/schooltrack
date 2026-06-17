@@ -559,12 +559,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   label: 'Nouvelle\nnote',
                   icon: Icons.edit_note_rounded,
                   color: const Color(0xFFD97706),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const ClassesPage()),
-                    );
-                  },
+                  onTap: () {},
                 ),
                 QuickActionButton(
                   label: 'Annonce\necole',
