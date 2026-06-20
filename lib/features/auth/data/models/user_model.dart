@@ -8,6 +8,7 @@ class UserModel extends UserEntity {
     required super.name,
     super.photoUrl,
     required super.role,
+    required super.schoolId,
   });
 
   factory UserModel.fromFirebaseUser(User user) {
@@ -17,6 +18,7 @@ class UserModel extends UserEntity {
       name: user.displayName ?? 'Utilisateur',
       photoUrl: user.photoURL,
       role: 'admin',
+      schoolId: '',
     );
   }
 
@@ -27,6 +29,7 @@ class UserModel extends UserEntity {
       name: map['name'] as String,
       photoUrl: map['photoUrl'] as String?,
       role: map['role'] as String? ?? 'admin',
+      schoolId: map['schoolId'] as String? ?? '',
     );
   }
 
@@ -37,6 +40,7 @@ class UserModel extends UserEntity {
       'name': name,
       'photoUrl': photoUrl,
       'role': role,
+      'schoolId': schoolId,
     };
   }
 }

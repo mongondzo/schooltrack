@@ -1,11 +1,12 @@
 // Entité User - couche domaine
 // Les entités représentent les objets métier purs, sans dépendance à Firebase ou autre
 class UserEntity {
-  final String uid;       // Identifiant unique Firebase
-  final String email;     // Email Google
-  final String name;      // Nom complet
+  final String uid; // Identifiant unique Firebase
+  final String email; // Email Google
+  final String name; // Nom complet
   final String? photoUrl; // Photo de profil (peut être null)
-  final String role;      // Rôle : 'admin', 'teacher', 'parent'
+  final String role; // Rôle : 'admin', 'teacher', 'parent'
+  final String schoolId;
 
   const UserEntity({
     required this.uid,
@@ -13,5 +14,6 @@ class UserEntity {
     required this.name,
     this.photoUrl,
     required this.role,
+    required this.schoolId,
   });
 }

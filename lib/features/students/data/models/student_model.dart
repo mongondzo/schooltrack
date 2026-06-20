@@ -17,6 +17,7 @@ class StudentModel extends Student {
     required super.telephoneParent,
     required super.adresse,
     required super.createdAt,
+    required super.schoolId,
   });
 
   // FACTORY : Crée un StudentModel depuis un document Firestore
@@ -35,6 +36,7 @@ class StudentModel extends Student {
       telephoneParent: data['telephoneParent'] ?? '',
       adresse: data['adresse'] ?? '',
       createdAt: (data['createdAt'] as Timestamp).toDate(),
+      schoolId: data['schoolId'] ?? '',
     );
   }
 
@@ -50,6 +52,7 @@ class StudentModel extends Student {
       telephoneParent: map['telephoneParent'] ?? '',
       adresse: map['adresse'] ?? '',
       createdAt: (map['createdAt'] as Timestamp).toDate(),
+      schoolId: map['schoolId'] ?? '',
     );
   }
 
@@ -64,6 +67,7 @@ class StudentModel extends Student {
       'telephoneParent': telephoneParent,
       'adresse': adresse,
       'createdAt': Timestamp.fromDate(createdAt),
+      'schoolId': schoolId,
     };
   }
 
@@ -79,6 +83,7 @@ class StudentModel extends Student {
       telephoneParent: student.telephoneParent,
       adresse: student.adresse,
       createdAt: student.createdAt,
+      schoolId: student.schoolId,
     );
   }
 }

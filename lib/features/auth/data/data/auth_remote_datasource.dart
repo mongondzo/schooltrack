@@ -42,13 +42,20 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     );
 
     // Étape 4 : Connecte l'utilisateur dans Firebase Auth
-    final UserCredential userCredential =
-        await _firebaseAuth.signInWithCredential(credential);
+    final UserCredential userCredential = await _firebaseAuth
+        .signInWithCredential(credential);
 
     final User firebaseUser = userCredential.user!;
 
     // Étape 5 : Crée le modèle utilisateur
-    final UserModel userModel = UserModel.fromFirebaseUser(firebaseUser);
+    final UserModel userModel = UserModel(
+      uid: firebaseUser.uid,
+      email: firebaseUser.email ?? '',
+      name: firebaseUser.displayName ?? 'Utilisateur',
+      photoUrl: firebaseUser.photoURL,
+      role: 'admin',
+      schoolId: 'school_001',
+    );
 
     // Étape 6 : Sauvegarde ou met à jour l'utilisateur dans Firestore
     await _firestore
@@ -63,10 +70,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   @override
   Future<void> signOut() async {
     // Déconnecte des deux services
-    await Future.wait([
-      _firebaseAuth.signOut(),
-      _googleSignIn.signOut(),
-    ]);
+    await Future.wait([_firebaseAuth.signOut(), _googleSignIn.signOut()]);
   }
 
   @override

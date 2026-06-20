@@ -36,9 +36,6 @@ class SchoolTrackApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // On instancie toutes les dépendances ici (injection manuelle)
-    // Pour un projet plus grand, on utiliserait get_it ou injectable
-
     //instance data ressource
     final authRemoteDatasource = AuthRemoteDatasourceImpl();
     final authRepository = AuthRepositoryImpl(
@@ -77,7 +74,7 @@ class SchoolTrackApp extends StatelessWidget {
           create: (_) => DashboardBloc(getDashboardStats: getDashboardStats),
         ),
 
-        // Ajoutez celui-ci :
+        // fournir pour la class :
         BlocProvider<ClassBloc>(
           create: (_) => ClassBloc(repository: classRepository),
         ),

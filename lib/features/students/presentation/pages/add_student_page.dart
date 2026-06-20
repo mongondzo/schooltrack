@@ -87,6 +87,7 @@ class AddStudentPage extends StatelessWidget {
                           telephoneParent: telephone,
                           adresse: adresse,
                           createdAt: DateTime.now(),
+                          schoolId: 'school_001',
                         );
 
                         context.read<StudentBloc>().add(

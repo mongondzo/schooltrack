@@ -11,6 +11,7 @@ class Student {
   final String telephoneParent;
   final String adresse;
   final DateTime createdAt; // Date de création dans la base de données
+  final String schoolId;
 
   const Student({
     required this.id,
@@ -21,6 +22,7 @@ class Student {
     required this.telephoneParent,
     required this.adresse,
     required this.createdAt,
+    required this.schoolId,
   });
 
   // Getter utilitaire : retourne "Prénom Nom" (ex: "nevy mongondzo")
@@ -44,6 +46,7 @@ class Student {
     String? telephoneParent,
     String? adresse,
     DateTime? createdAt,
+    String? schoolId,
   }) {
     return Student(
       id: id ?? this.id,
@@ -54,6 +57,7 @@ class Student {
       telephoneParent: telephoneParent ?? this.telephoneParent,
       adresse: adresse ?? this.adresse,
       createdAt: createdAt ?? this.createdAt,
+      schoolId: schoolId ?? this.schoolId,
     );
   }
 

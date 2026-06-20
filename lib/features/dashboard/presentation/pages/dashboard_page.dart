@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schooltrack/core/routes/app_repositories.dart';
+import 'package:schooltrack/features/attendance/presentation/pages/attendance_page.dart';
 import 'package:schooltrack/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:schooltrack/features/auth/presentation/bloc/auth_event.dart';
 import 'package:schooltrack/features/auth/presentation/bloc/auth_state.dart';
@@ -8,6 +10,8 @@ import 'package:schooltrack/features/dashboard/presentation/bloc/dashboard_bloc.
 import 'package:schooltrack/features/dashboard/presentation/widgets/quick_action_button.dart';
 import 'package:schooltrack/features/dashboard/presentation/widgets/stat_card.dart';
 import 'package:schooltrack/features/dashboard/presentation/widgets/stats_skeleton_loader.dart';
+import 'package:schooltrack/features/grades/presentation/pages/grades_page.dart';
+import 'package:schooltrack/features/notifications/presentation/pages/notifications_page.dart';
 import 'package:schooltrack/features/students/presentation/pages/add_student_page.dart';
 import 'package:schooltrack/features/students/presentation/pages/student_list_page.dart';
 import 'package:schooltrack/features/students/student_dependencies.dart';
@@ -84,10 +88,10 @@ class _DashboardPageState extends State<DashboardPage> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Icon(
-            Icons.school_rounded,
-            color: Color(0xFF2563EB),
-            size: 20,
+          child: Image(
+            image: AssetImage("assets/images/schooltrack.png"),
+            width: 8,
+            height: 8,
           ),
         ),
         const SizedBox(width: 10),
@@ -193,7 +197,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '$greeting, Admin ',
+                      '$greeting, $userName ',
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w700,
@@ -350,7 +354,14 @@ class _DashboardPageState extends State<DashboardPage> {
                       iconBgColor: const Color(0xFFB45309),
                       subtitle: "Aujourd'hui",
                       onTap: () {
-                        // TODO: Naviguer vers les présences
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => AttendancePage(
+                              repository: attendanceRepository,
+                            ),
+                          ),
+                        );
                       },
                     ),
 
@@ -363,7 +374,14 @@ class _DashboardPageState extends State<DashboardPage> {
                       iconBgColor: const Color(0xFF6D28D9),
                       subtitle: 'Non lues',
                       onTap: () {
-                        // TODO: Naviguer vers les notifications
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => NotificationsPage(
+                              repository: notificationRepository,
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ],
@@ -559,14 +577,28 @@ class _DashboardPageState extends State<DashboardPage> {
                   label: 'Nouvelle\nnote',
                   icon: Icons.edit_note_rounded,
                   color: const Color(0xFFD97706),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => GradesPage(repository: gradeRepository),
+                      ),
+                    );
+                  },
                 ),
                 QuickActionButton(
                   label: 'Annonce\necole',
                   icon: Icons.campaign_rounded,
                   color: const Color(0xFFDC2626),
                   onTap: () {
-                    // TODO: Créer une annonce
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => NotificationsPage(
+                          repository: notificationRepository,
+                        ),
+                      ),
+                    );
                   },
                 ),
               ],
