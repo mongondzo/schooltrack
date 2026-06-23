@@ -89,10 +89,12 @@ class LoginPage extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const Icon(
-                Icons.school_rounded,
-                size: 52,
-                color: Color(0xFF2563EB),
+
+              //logo application
+              child: Image(
+                image: AssetImage("assets/images/schooltrack.png"),
+                width: 30,
+                height: 40,
               ),
             ),
 

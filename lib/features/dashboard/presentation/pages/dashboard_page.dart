@@ -173,8 +173,8 @@ class _DashboardPageState extends State<DashboardPage> {
           padding: const EdgeInsets.fromLTRB(20, 24, 20, 28),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10),
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
             ),
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -189,7 +189,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '$greeting, Admin ',
+                      '$greeting, $userName ',
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w700,
@@ -215,11 +215,11 @@ class _DashboardPageState extends State<DashboardPage> {
                   _showLogoutMenu(context);
                 },
                 child: Container(
-                  width: 46,
-                  height: 46,
+                  width: 80,
+                  height: 80,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 2.5),
+                    border: Border.all(color: Colors.white, width: 2),
                     color: Colors.white.withOpacity(0.2),
                   ),
                   child: ClipOval(
@@ -297,7 +297,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   crossAxisCount: 2,
                   mainAxisSpacing: 16,
                   crossAxisSpacing: 16,
-                  childAspectRatio: 1.15,
+                  childAspectRatio: 0.8,
                   children: [
                     // Carte Élèves
                     StatCard(
@@ -313,43 +313,10 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
 
                     // Carte Classes
-                    StatCard(
-                      title: 'Classes',
-                      value: '${stats.totalClasses}',
-                      icon: Icons.class_rounded,
-                      color: const Color(0xFF059669),
-                      iconBgColor: const Color(0xFF047857),
-                      subtitle: 'Voir plus',
-                      onTap: () {
-                        // TODO: Naviguer vers les classes
-                      },
-                    ),
 
                     // Carte Présences
-                    StatCard(
-                      title: 'Présences',
-                      value: '${stats.totalAttendances}',
-                      icon: Icons.how_to_reg_rounded,
-                      color: const Color(0xFFD97706),
-                      iconBgColor: const Color(0xFFB45309),
-                      subtitle: "Aujourd'hui",
-                      onTap: () {
-                        // TODO: Naviguer vers les présences
-                      },
-                    ),
 
                     // Carte Notifications
-                    StatCard(
-                      title: 'Notifications',
-                      value: '${stats.totalNotifications}',
-                      icon: Icons.notifications_rounded,
-                      color: const Color(0xFF7C3AED),
-                      iconBgColor: const Color(0xFF6D28D9),
-                      subtitle: 'Non lues',
-                      onTap: () {
-                        // TODO: Naviguer vers les notifications
-                      },
-                    ),
                   ],
                 );
               }
