@@ -7,6 +7,9 @@ import 'package:schooltrack/features/dashboard/presentation/bloc/dashboard_bloc.
 import 'package:schooltrack/features/dashboard/presentation/widgets/quick_action_button.dart';
 import 'package:schooltrack/features/dashboard/presentation/widgets/stat_card.dart';
 import 'package:schooltrack/features/dashboard/presentation/widgets/stats_skeleton_loader.dart';
+import 'package:schooltrack/features/students/presentation/pages/add_student_page.dart';
+import 'package:schooltrack/features/students/presentation/pages/student_list_page.dart';
+import 'package:schooltrack/features/students/student_dependencies.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -308,7 +311,14 @@ class _DashboardPageState extends State<DashboardPage> {
                       iconBgColor: const Color(0xFF1D4ED8),
                       subtitle: 'Voir plus',
                       onTap: () {
-                        // TODO: Naviguer vers la liste des élèves
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => StudentDependencies.provideBloc(
+                              child: const StudentListPage(),
+                            ),
+                          ),
+                        );
                       },
                     ),
 
@@ -485,7 +495,14 @@ class _DashboardPageState extends State<DashboardPage> {
                   icon: Icons.person_add_rounded,
                   color: const Color(0xFF2563EB),
                   onTap: () {
-                    // TODO: Naviguer vers ajout d'élève
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => StudentDependencies.provideBloc(
+                          child: const AddStudentPage(),
+                        ),
+                      ),
+                    );
                   },
                 ),
                 QuickActionButton(
