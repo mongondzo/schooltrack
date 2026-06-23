@@ -173,8 +173,8 @@ class _DashboardPageState extends State<DashboardPage> {
           padding: const EdgeInsets.fromLTRB(20, 24, 20, 28),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10),
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
             ),
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -189,7 +189,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '$greeting, Admin ',
+                      '$greeting, $userName ',
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w700,
@@ -215,11 +215,11 @@ class _DashboardPageState extends State<DashboardPage> {
                   _showLogoutMenu(context);
                 },
                 child: Container(
-                  width: 46,
-                  height: 46,
+                  width: 80,
+                  height: 80,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 2.5),
+                    border: Border.all(color: Colors.white, width: 2),
                     color: Colors.white.withOpacity(0.2),
                   ),
                   child: ClipOval(
