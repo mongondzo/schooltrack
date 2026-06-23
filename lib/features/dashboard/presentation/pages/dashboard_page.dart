@@ -297,7 +297,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   crossAxisCount: 2,
                   mainAxisSpacing: 16,
                   crossAxisSpacing: 16,
-                  childAspectRatio: 1.15,
+                  childAspectRatio: 0.8,
                   children: [
                     // Carte Élèves
                     StatCard(
