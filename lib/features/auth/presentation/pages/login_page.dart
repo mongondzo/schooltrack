@@ -200,28 +200,6 @@ class LoginPage extends StatelessWidget {
               );
             },
           ),
-
-          const SizedBox(height: 24),
-
-          // Lien pour créer un compte
-          Center(
-            child: Text.rich(
-              TextSpan(
-                text: 'Pas encore de compte ? ',
-                style: TextStyle(fontSize: 13, color: const Color(0xFF64748B)),
-                children: [
-                  TextSpan(
-                    text: 'S\'inscrire',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: const Color(0xFF2563EB),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
         ],
       ),
     );

@@ -9,7 +9,7 @@ import 'package:schooltrack/features/splash/presentation/pages/splash_page.dart'
 
 // Classe qui centralise toutes les routes de l'application
 class AppRouter {
-  // Noms des routes (évite les fautes de frappe)
+  // Noms des routes
   static const String splash = '/';
   static const String login = '/login';
   static const String dashboard = '/dashboard';
