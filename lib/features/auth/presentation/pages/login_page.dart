@@ -89,10 +89,12 @@ class LoginPage extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const Icon(
-                Icons.school_rounded,
-                size: 52,
-                color: Color(0xFF2563EB),
+
+              //logo application
+              child: Image(
+                image: AssetImage("assets/images/schooltrack.png"),
+                width: 30,
+                height: 40,
               ),
             ),
 
@@ -199,28 +201,6 @@ class LoginPage extends StatelessWidget {
                       },
               );
             },
-          ),
-
-          const SizedBox(height: 24),
-
-          // Lien pour créer un compte
-          Center(
-            child: Text.rich(
-              TextSpan(
-                text: 'Pas encore de compte ? ',
-                style: TextStyle(fontSize: 13, color: const Color(0xFF64748B)),
-                children: [
-                  TextSpan(
-                    text: 'S\'inscrire',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: const Color(0xFF2563EB),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ),
         ],
       ),
