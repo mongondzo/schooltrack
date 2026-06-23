@@ -313,43 +313,10 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
 
                     // Carte Classes
-                    StatCard(
-                      title: 'Classes',
-                      value: '${stats.totalClasses}',
-                      icon: Icons.class_rounded,
-                      color: const Color(0xFF059669),
-                      iconBgColor: const Color(0xFF047857),
-                      subtitle: 'Voir plus',
-                      onTap: () {
-                        // TODO: Naviguer vers les classes
-                      },
-                    ),
 
                     // Carte Présences
-                    StatCard(
-                      title: 'Présences',
-                      value: '${stats.totalAttendances}',
-                      icon: Icons.how_to_reg_rounded,
-                      color: const Color(0xFFD97706),
-                      iconBgColor: const Color(0xFFB45309),
-                      subtitle: "Aujourd'hui",
-                      onTap: () {
-                        // TODO: Naviguer vers les présences
-                      },
-                    ),
 
                     // Carte Notifications
-                    StatCard(
-                      title: 'Notifications',
-                      value: '${stats.totalNotifications}',
-                      icon: Icons.notifications_rounded,
-                      color: const Color(0xFF7C3AED),
-                      iconBgColor: const Color(0xFF6D28D9),
-                      subtitle: 'Non lues',
-                      onTap: () {
-                        // TODO: Naviguer vers les notifications
-                      },
-                    ),
                   ],
                 );
               }
