@@ -11,6 +11,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:schooltrack/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:schooltrack/features/students/data/datasources/student_remote_datasource.dart';
 import 'package:schooltrack/features/students/data/repositories/student_repository_impl.dart';
 import 'package:schooltrack/features/students/presentation/bloc/student_bloc.dart';
@@ -31,7 +32,7 @@ class StudentDependencies {
         final repository = StudentRepositoryImpl(remoteDataSource: dataSource);
 
         // 3. BLoC : utilise le repository (couche presentation)
-        return StudentBloc(repository: repository);
+        return StudentBloc(repository: repository, authBloc: AuthBloc());
       },
       child: child,
     );

@@ -732,14 +732,14 @@ class _DashboardPageState extends State<DashboardPage> {
               // Accueil : on est déjà sur le Dashboard, rien à faire
               break;
             case 1:
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (_) => StudentDependencies.provideBloc(
-              //       child: const StudentListPage(),
-              //     ),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => StudentDependencies.provideBloc(
+                    child: const StudentListPage(),
+                  ),
+                ),
+              );
               break;
             case 2:
               // Navigator.push(
@@ -765,7 +765,7 @@ class _DashboardPageState extends State<DashboardPage> {
               Icons.home_rounded,
               color: Color(0xFF2563EB),
             ),
-            label: 'Accueil',
+            label: '',
           ),
           NavigationDestination(
             icon: const Icon(Icons.people_outline),
@@ -773,7 +773,7 @@ class _DashboardPageState extends State<DashboardPage> {
               Icons.people_rounded,
               color: Color(0xFF2563EB),
             ),
-            label: 'Élèves',
+            label: '',
           ),
           NavigationDestination(
             icon: const Icon(Icons.class_outlined),
@@ -781,7 +781,7 @@ class _DashboardPageState extends State<DashboardPage> {
               Icons.class_rounded,
               color: Color(0xFF2563EB),
             ),
-            label: 'Classes',
+            label: '',
           ),
           NavigationDestination(
             icon: const Icon(Icons.more_horiz_rounded),
@@ -789,7 +789,7 @@ class _DashboardPageState extends State<DashboardPage> {
               Icons.more_horiz_rounded,
               color: Color(0xFF2563EB),
             ),
-            label: 'Plus',
+            label: '',
           ),
         ],
       ),

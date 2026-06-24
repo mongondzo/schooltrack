@@ -12,6 +12,7 @@
 
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schooltrack/features/auth/presentation/bloc/auth_bloc.dart';
 import '../../domain/entities/student.dart';
 import '../../domain/repositories/student_repository.dart';
 import 'student_event.dart';
@@ -28,7 +29,8 @@ class StudentBloc extends Bloc<StudentEvent, StudentState> {
   StreamSubscription<List<Student>>? _studentsSubscription;
 
   // On commence avec l'état initial
-  StudentBloc({required this.repository}) : super(StudentInitial()) {
+  StudentBloc({required this.repository, required AuthBloc authBloc})
+    : super(StudentInitial()) {
     // Enregistrement de chaque handler d'événement
     on<LoadStudents>(_onLoadStudents);
     on<AddStudent>(_onAddStudent);
