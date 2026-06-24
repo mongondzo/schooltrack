@@ -1,24 +1,37 @@
+// ===========================================================
+// FICHIER : main.dart
+// CHEMIN  : lib/main.dart
+// ===========================================================
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:schooltrack/core/routes/app_router.dart';
-import 'package:schooltrack/features/auth/data/data/auth_remote_datasource.dart';
-import 'package:schooltrack/features/auth/data/repositories/auth_repository_impl.dart';
-import 'package:schooltrack/features/auth/domain/usecases/sign_in_with_google.dart';
-import 'package:schooltrack/features/auth/domain/usecases/sign_out.dart';
-import 'package:schooltrack/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:schooltrack/features/auth/presentation/bloc/auth_event.dart';
-import 'package:schooltrack/features/dashboard/data/datasources/dashboard_remote_datasource.dart';
-import 'package:schooltrack/features/dashboard/data/repositories/dashboard_repository_impl.dart';
-import 'package:schooltrack/features/dashboard/domain/usecases/get_dashboard_stats.dart';
-import 'package:schooltrack/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-void main() async {
-  // Nécessaire avant d'utiliser Firebase
+// ── Auth ───────────────────────────────────────────────────
+import 'features/auth/data/repositories/auth_repository_impl.dart';
+import 'features/auth/presentation/bloc/auth_bloc.dart';
+import 'features/auth/presentation/pages/splash_page.dart';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialise Firebase (doit être fait avant tout)
   await Firebase.initializeApp();
+
+  await initializeDateFormatting('fr_FR', null);
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+    ),
+  );
 
   runApp(const SchoolTrackApp());
 }
@@ -28,49 +41,103 @@ class SchoolTrackApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // On instancie toutes les dépendances ici (injection manuelle)
-    // Pour un projet plus grand, on utiliserait get_it ou injectable
-
-    final authRemoteDatasource = AuthRemoteDatasourceImpl();
-    final authRepository = AuthRepositoryImpl(
-      remoteDatasource: authRemoteDatasource,
-    );
-    final signInWithGoogle = SignInWithGoogle(authRepository);
-    final signOut = SignOut(authRepository);
-
-    final dashboardRemoteDatasource = DashboardRemoteDatasourceImpl();
-    final dashboardRepository = DashboardRepositoryImpl(
-      remoteDatasource: dashboardRemoteDatasource,
-    );
-    final getDashboardStats = GetDashboardStats(dashboardRepository);
-
     return MultiBlocProvider(
       providers: [
-        // Fournit AuthBloc à toute l'application
+        // ── 1. Auth ────────────────────────────────────────
         BlocProvider<AuthBloc>(
-          create: (_) =>
-              AuthBloc(signInWithGoogle: signInWithGoogle, signOut: signOut)
-                ..add(
-                  AuthCheckRequested(),
-                ), // Vérifie si l'utilisateur est déjà connecté
+          create: (_) => AuthBloc(repository: AuthRepositoryImpl()),
         ),
-        // Fournit DashboardBloc à toute l'application
-        BlocProvider<DashboardBloc>(
-          create: (_) => DashboardBloc(getDashboardStats: getDashboardStats),
-        ),
+
+        // ── 2. Students ────────────────────────────────────
+        // BlocProvider<StudentBloc>(
+        //   create: (context) => StudentBloc(
+        //     authBloc: context.read<AuthBloc>(),
+        //     repository: StudentRepositoryImpl(
+        //       remoteDataSource: StudentRemoteDataSourceImpl(),
+        //     ),
+        //   ),
+        // ),
+
+        // ── 3. Classes ─────────────────────────────────────
+        // BlocProvider<ClassBloc>(
+        //   create: (context) => ClassBloc(
+        //     authBloc: context.read<AuthBloc>(),
+        //     repository: ClassRepositoryImpl(
+        //       dataSource: ClassRemoteDataSourceImpl(),
+        //     ),
+        //   ),
+        // ),
+
+        // ── 4. Notes ───────────────────────────────────────
+        // BlocProvider<GradeBloc>(
+        //   create: (context) => GradeBloc(
+        //     authBloc: context.read<AuthBloc>(),
+        //     repository: GradeRepositoryImpl(
+        //       dataSource: GradeRemoteDataSourceImpl(),
+        //     ),
+        //   ),
+        // ),
+
+        // ── 5. Présences ───────────────────────────────────
+        // BlocProvider<AttendanceBloc>(
+        //   create: (context) => AttendanceBloc(
+        //     authBloc: context.read<AuthBloc>(),
+        //     repository: AttendanceRepositoryImpl(
+        //       dataSource: AttendanceRemoteDataSourceImpl(),
+        //     ),
+        //   ),
+        // ),
+
+        // ── 6. Notifications ───────────────────────────────
+        // BlocProvider<NotificationBloc>(
+        //   create: (context) => NotificationBloc(
+        //     authBloc: context.read<AuthBloc>(),
+        //     repository: NotificationRepositoryImpl(
+        //       dataSource: NotificationRemoteDataSourceImpl(),
+        //     ),
+        //   ),
+        // ),
       ],
-      child: MaterialApp.router(
+
+      child: MaterialApp(
         title: 'SchoolTrack',
         debugShowCheckedModeBanner: false,
 
-        // Thème Material 3 avec couleur principale #2563EB
+        // ── Thème Material 3 ──────────────────────────────
         theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          fontFamily: 'Nunito',
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1565C0)),
-        ),
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xFF2563EB),
+            brightness: Brightness.light,
+          ),
 
-        routerConfig: AppRouter.router,
+          fontFamily: 'Roboto',
+
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xFF2563EB),
+            foregroundColor: Colors.white,
+            elevation: 0,
+            centerTitle: false,
+            titleTextStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF2563EB),
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 0,
+            ),
+          ),
+        ), //  ferme ThemeData
+        // ── Premier écran
+        home: const SplashPage(), //  dans MaterialApp
       ),
     );
   }
