@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:schooltrack/core/routes/app_router.dart';
+import 'package:schooltrack/core/services/connectivity_service.dart';
 import 'package:schooltrack/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:schooltrack/features/auth/presentation/bloc/auth_state.dart';
+import 'package:schooltrack/features/auth/presentation/pages/login_page.dart';
+import 'package:schooltrack/features/auth/presentation/pages/no_internet_page.dart';
+import 'package:schooltrack/features/auth/presentation/pages/profile_page.dart';
+import 'package:schooltrack/features/dashboard/presentation/pages/dashboard_page.dart';
 
 class SplashPage extends StatefulWidget {
+  // Nom de route pour la navigation nommée
+  static const String routeName = '/splash';
+
   const SplashPage({super.key});
 
   @override
@@ -14,55 +19,96 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage>
     with SingleTickerProviderStateMixin {
-  // Contrôleur pour les animations
-  late AnimationController _animationController;
+  // ── Animation du logo ─────────────────────────────────────
+  late AnimationController _animController;
   late Animation<double> _fadeAnimation;
   late Animation<double> _scaleAnimation;
+
+  final ConnectivityService _connectivityService = ConnectivityService();
 
   @override
   void initState() {
     super.initState();
+    _setupAnimation();
+    _startChecks();
+  }
 
-    // Initialise les animations
-    _animationController = AnimationController(
+  // ── Configure l'animation d'apparition du logo ───────────
+  void _setupAnimation() {
+    _animController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1200),
+      duration: const Duration(milliseconds: 900),
     );
 
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.0, 0.6, curve: Curves.easeIn),
-      ),
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _animController, curve: Curves.easeIn));
+
+    _scaleAnimation = Tween<double>(begin: 0.7, end: 1.0).animate(
+      CurvedAnimation(parent: _animController, curve: Curves.easeOutBack),
     );
 
-    // Animation d'échelle (0.8 → 1 = petit → normal)
-    _scaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
-      ),
-    );
+    _animController.forward();
+  }
 
-    // Lance l'animation au démarrage
-    _animationController.forward();
+  // ──────────────────────────────────────────────────────────
+  // _startChecks() — Lance les vérifications au démarrage
+  //
+  // On attend un minimum de 1.5 secondes pour que l'animation
+  // soit visible, puis on navigue selon la situation.
+  // ──────────────────────────────────────────────────────────
+  Future<void> _startChecks() async {
+    // Attente minimum pour l'animation du splash
+    await Future.delayed(const Duration(milliseconds: 1500));
+
+    // Vérifie si le widget est encore monté (pas détruit)
+    if (!mounted) return;
+
+    // ── Vérification 1 : Internet ─────────────────────────
+    final hasInternet = await _connectivityService.hasInternet();
+
+    if (!mounted) return;
+
+    if (!hasInternet) {
+      // Pas de connexion → page d'erreur réseau
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => const NoInternetPage()),
+      );
+      return;
+    }
+
+    // ── Vérification 2 : Session utilisateur ──────────────
+    // On déclenche la vérification via le BLoC
+    // Le BLoC va émettre AuthAuthenticated ou AuthUnauthenticated
+    context.read<AuthBloc>().add(const CheckAuthStatus());
+
+    // La navigation sera gérée par BlocListener (voir build())
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
+      // BlocListener réagit aux changements d'état du BLoC
       listener: (context, state) {
         if (state is AuthAuthenticated) {
-          context.go(AppRouter.dashboard);
+          _navigateByRole(context, state);
         } else if (state is AuthUnauthenticated) {
-          context.go(AppRouter.login);
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_) => const LoginPage()),
+          );
+        } else if (state is AuthError) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_) => const LoginPage()),
+          );
         }
+        // AuthLoading : on ne fait rien, le spinner tourne déjà
       },
       child: Scaffold(
         body: Container(
@@ -79,7 +125,7 @@ class _SplashPageState extends State<SplashPage>
           ),
           child: Center(
             child: AnimatedBuilder(
-              animation: _animationController,
+              animation: _animController,
               builder: (context, child) {
                 return FadeTransition(
                   opacity: _fadeAnimation,
@@ -165,5 +211,17 @@ class _SplashPageState extends State<SplashPage>
         ),
       ),
     );
+  }
+
+  // _navigateByRole() — Redirige selon le rôle de l'utilisateur
+  // admin  → DashboardPage (gestion complète)
+  void _navigateByRole(BuildContext context, AuthAuthenticated state) {
+    // Pour simplifier, on redirige tout le monde vers le dashboard
+    // Vous pourrez ajouter la logique de rôles plus tard
+    final destination = DashboardPage();
+
+    Navigator.of(
+      context,
+    ).pushReplacement(MaterialPageRoute(builder: (_) => destination));
   }
 }

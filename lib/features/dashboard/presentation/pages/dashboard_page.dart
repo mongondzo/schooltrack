@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schooltrack/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:schooltrack/features/auth/presentation/bloc/auth_event.dart';
-import 'package:schooltrack/features/auth/presentation/bloc/auth_state.dart';
+import 'package:schooltrack/features/auth/presentation/pages/profile_page.dart';
 import 'package:schooltrack/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:schooltrack/features/dashboard/presentation/widgets/quick_action_button.dart';
 import 'package:schooltrack/features/dashboard/presentation/widgets/stat_card.dart';
@@ -83,10 +82,10 @@ class _DashboardPageState extends State<DashboardPage> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Icon(
-            Icons.school_rounded,
-            color: Color(0xFF2563EB),
-            size: 20,
+          child: Image(
+            image: AssetImage("assets/images/schooltrack.png"),
+            width: 8,
+            height: 8,
           ),
         ),
         const SizedBox(width: 10),
@@ -176,8 +175,8 @@ class _DashboardPageState extends State<DashboardPage> {
           padding: const EdgeInsets.fromLTRB(20, 24, 20, 28),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(25),
+              bottomRight: Radius.circular(25),
             ),
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -218,8 +217,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   _showLogoutMenu(context);
                 },
                 child: Container(
-                  width: 80,
-                  height: 80,
+                  width: 75,
+                  height: 75,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.white, width: 2),
@@ -299,8 +298,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisCount: 2,
                   mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                  childAspectRatio: 0.8,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 0.82,
                   children: [
                     // Carte Élèves
                     StatCard(
@@ -322,11 +321,116 @@ class _DashboardPageState extends State<DashboardPage> {
                       },
                     ),
 
-                    // Carte Classes
+                    // // Carte Élèves
+                    // StatCard(
+                    //   title: 'Élèves',
+                    //   value: '${stats.totalStudents}',
+                    //   icon: Icons.people_alt_rounded,
+                    //   color: const Color(0xFF2563EB),
+                    //   iconBgColor: const Color(0xFF1D4ED8),
+                    //   subtitle: 'Voir plus',
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (_) => StudentDependencies.provideBloc(
+                    //           child: const StudentListPage(),
+                    //         ),
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
 
-                    // Carte Présences
+                    // // Carte Classes
+                    // StatCard(
+                    //   title: 'Classes',
+                    //   value: '${stats.totalClasses}',
+                    //   icon: Icons.class_rounded,
+                    //   color: const Color(0xFF059669),
+                    //   iconBgColor: const Color(0xFF047857),
+                    //   subtitle: 'Voir plus',
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (_) => const ClassesPage(),
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
 
-                    // Carte Notifications
+                    // // Carte Présences
+                    // StatCard(
+                    //   title: 'Présences',
+                    //   value: '${stats.totalAttendances}',
+                    //   icon: Icons.how_to_reg_rounded,
+                    //   color: const Color(0xFFD97706),
+                    //   iconBgColor: const Color(0xFFB45309),
+                    //   subtitle: "Aujourd'hui",
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (_) => AttendancePage(
+                    //           repository: attendanceRepository,
+                    //         ),
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
+
+                    // // Carte Notifications
+                    // StatCard(
+                    //   title: 'Notifications',
+                    //   value: '${stats.totalNotifications}',
+                    //   icon: Icons.notifications_rounded,
+                    //   color: const Color(0xFF7C3AED),
+                    //   iconBgColor: const Color(0xFF6D28D9),
+                    //   subtitle: 'Non lues',
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (_) => NotificationsPage(
+                    //           repository: notificationRepository,
+                    //         ),
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
+
+                    // StatCard(
+                    //   title: 'Matieres',
+                    //   value: '${stats.totalNotifications}',
+                    //   icon: Icons.subject,
+                    //   color: const Color(0xFF7C3AED),
+                    //   iconBgColor: const Color(0xFF6D28D9),
+                    //   subtitle: 'Non lues',
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (_) => NotificationsPage(
+                    //           repository: notificationRepository,
+                    //         ),
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
+
+                    // // Carte Emploi du temps
+                    // ScheduleStatCard(
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (_) => SchedulesPage(
+                    //           repository: notificationRepository,
+                    //         ),
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
                   ],
                 );
               }
@@ -503,6 +607,15 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                       ),
                     );
+
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (_) => StudentDependencies.provideBloc(
+                    //       child: const AddStudentPage(),
+                    //     ),
+                    //   ),
+                    // );
                   },
                 ),
                 QuickActionButton(
@@ -510,7 +623,10 @@ class _DashboardPageState extends State<DashboardPage> {
                   icon: Icons.add_box_rounded,
                   color: const Color(0xFF059669),
                   onTap: () {
-                    // TODO: Naviguer vers ajout de classe
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (_) => const ClassesPage()),
+                    // );
                   },
                 ),
                 QuickActionButton(
@@ -518,15 +634,27 @@ class _DashboardPageState extends State<DashboardPage> {
                   icon: Icons.edit_note_rounded,
                   color: const Color(0xFFD97706),
                   onTap: () {
-                    // TODO: Naviguer vers ajout de note
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (_) => GradesPage(repository: gradeRepository),
+                    //   ),
+                    // );
                   },
                 ),
                 QuickActionButton(
-                  label: 'Annonce',
+                  label: 'Annonce\necole',
                   icon: Icons.campaign_rounded,
                   color: const Color(0xFFDC2626),
                   onTap: () {
-                    // TODO: Créer une annonce
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (_) => NotificationsPage(
+                    //       repository: notificationRepository,
+                    //     ),
+                    //   ),
+                    // );
                   },
                 ),
               ],
@@ -599,7 +727,33 @@ class _DashboardPageState extends State<DashboardPage> {
         selectedIndex: _selectedIndex,
         onDestinationSelected: (index) {
           setState(() => _selectedIndex = index);
-          // TODO: Naviguer vers la page correspondante dans les prochaines étapes
+          switch (index) {
+            case 0:
+              // Accueil : on est déjà sur le Dashboard, rien à faire
+              break;
+            case 1:
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (_) => StudentDependencies.provideBloc(
+              //       child: const StudentListPage(),
+              //     ),
+              //   ),
+              // );
+              break;
+            case 2:
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (_) => const ClassesPage()),
+              // );
+              break;
+            case 3:
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (_) => const ProfilePage()),
+              // );
+              break;
+          }
         },
         backgroundColor: Colors.white,
         indicatorColor: const Color(0xFFEFF6FF),
@@ -704,9 +858,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    Navigator.pop(ctx);
-                    // Déclenche la déconnexion via AuthBloc
-                    context.read<AuthBloc>().add(AuthSignOutRequested());
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => ProfilePage()),
+                    );
                   },
                   icon: const Icon(Icons.logout_rounded),
                   label: Text(

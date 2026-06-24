@@ -7,7 +7,7 @@ class GoogleSignInButton extends StatelessWidget {
   const GoogleSignInButton({
     super.key,
     required this.onPressed,
-    this.isLoading = false,
+    required this.isLoading,
   });
 
   @override

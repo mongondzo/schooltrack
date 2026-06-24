@@ -29,6 +29,7 @@ class StatCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(18),
+
           boxShadow: [
             BoxShadow(
               color: color.withOpacity(0.35),
@@ -73,7 +74,7 @@ class StatCard extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 30),
 
             // Valeur principale (nombre)
             Text(
@@ -86,7 +87,7 @@ class StatCard extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 4),
+            const SizedBox(height: 3),
 
             // Label
             Text(
