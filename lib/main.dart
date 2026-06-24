@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:schooltrack/core/router/app_repositories.dart';
+import 'package:schooltrack/features/classes/presentation/bloc/class_bloc.dart';
 import 'package:schooltrack/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 
 // ── Auth ───────────────────────────────────────────────────
@@ -51,14 +52,9 @@ class SchoolTrackApp extends StatelessWidget {
         ),
 
         // ── 2. Students ────────────────────────────────────
-        // BlocProvider<StudentBloc>(
-        //   create: (context) => StudentBloc(
-        //     authBloc: context.read<AuthBloc>(),
-        //     repository: StudentRepositoryImpl(
-        //       remoteDataSource: StudentRemoteDataSourceImpl(),
-        //     ),
-        //   ),
-        // ),
+        BlocProvider<ClassBloc>(
+          create: (_) => ClassBloc(repository: classRepository),
+        ),
 
         // ── 3. Classes ─────────────────────────────────────
         // BlocProvider<ClassBloc>(

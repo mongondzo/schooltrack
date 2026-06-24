@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schooltrack/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:schooltrack/features/auth/presentation/pages/profile_page.dart';
+import 'package:schooltrack/features/classes/presentation/pages/classes_page.dart';
 import 'package:schooltrack/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:schooltrack/features/dashboard/presentation/widgets/quick_action_button.dart';
 import 'package:schooltrack/features/dashboard/presentation/widgets/stat_card.dart';
@@ -322,6 +323,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
 
                     // // Carte Élèves
+
                     // StatCard(
                     //   title: 'Élèves',
                     //   value: '${stats.totalStudents}',
@@ -342,22 +344,22 @@ class _DashboardPageState extends State<DashboardPage> {
                     // ),
 
                     // // Carte Classes
-                    // StatCard(
-                    //   title: 'Classes',
-                    //   value: '${stats.totalClasses}',
-                    //   icon: Icons.class_rounded,
-                    //   color: const Color(0xFF059669),
-                    //   iconBgColor: const Color(0xFF047857),
-                    //   subtitle: 'Voir plus',
-                    //   onTap: () {
-                    //     Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (_) => const ClassesPage(),
-                    //       ),
-                    //     );
-                    //   },
-                    // ),
+                    StatCard(
+                      title: 'Classes',
+                      value: '${stats.totalClasses}',
+                      icon: Icons.class_rounded,
+                      color: const Color(0xFF059669),
+                      iconBgColor: const Color(0xFF047857),
+                      subtitle: 'Voir plus',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const ClassesPage(),
+                          ),
+                        );
+                      },
+                    ),
 
                     // // Carte Présences
                     // StatCard(
@@ -607,15 +609,6 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                       ),
                     );
-
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (_) => StudentDependencies.provideBloc(
-                    //       child: const AddStudentPage(),
-                    //     ),
-                    //   ),
-                    // );
                   },
                 ),
                 QuickActionButton(
@@ -623,10 +616,10 @@ class _DashboardPageState extends State<DashboardPage> {
                   icon: Icons.add_box_rounded,
                   color: const Color(0xFF059669),
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (_) => const ClassesPage()),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const ClassesPage()),
+                    );
                   },
                 ),
                 QuickActionButton(
