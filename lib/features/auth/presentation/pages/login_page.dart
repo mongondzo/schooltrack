@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schooltrack/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:schooltrack/features/auth/presentation/pages/profile_page.dart';
 import 'package:schooltrack/features/auth/presentation/widgets/google_sign_in_button.dart';
+import 'package:schooltrack/features/dashboard/presentation/pages/dashboard_page.dart';
 
 class LoginPage extends StatelessWidget {
   static const String routeName = '/login';
@@ -71,11 +72,11 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  // ── Redirige vers le profil après connexion ─────────────────
+  // ── Redirige vers le dashboard après connexion ─────────────────
   void _navigateByRole(BuildContext context, AuthAuthenticated state) {
-    // Pour simplifier, tout le monde va vers ProfilePage
+    // Pour simplifier, tout le monde va vers dashboardPage
     // Vous pourrez ajouter la logique de rôles plus tard
-    final destination = const ProfilePage();
+    final destination = const DashboardPage();
 
     Navigator.of(
       context,

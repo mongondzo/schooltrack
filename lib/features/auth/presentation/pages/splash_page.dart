@@ -5,6 +5,7 @@ import 'package:schooltrack/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:schooltrack/features/auth/presentation/pages/login_page.dart';
 import 'package:schooltrack/features/auth/presentation/pages/no_internet_page.dart';
 import 'package:schooltrack/features/auth/presentation/pages/profile_page.dart';
+import 'package:schooltrack/features/dashboard/presentation/pages/dashboard_page.dart';
 
 class SplashPage extends StatefulWidget {
   // Nom de route pour la navigation nommée
@@ -214,12 +215,10 @@ class _SplashPageState extends State<SplashPage>
 
   // _navigateByRole() — Redirige selon le rôle de l'utilisateur
   // admin  → DashboardPage (gestion complète)
-  // parent → ParentDashboardPage (lecture seule)
-  // autre  → LoginPage (rôle inconnu = sécurité)
   void _navigateByRole(BuildContext context, AuthAuthenticated state) {
     // Pour simplifier, on redirige tout le monde vers le dashboard
     // Vous pourrez ajouter la logique de rôles plus tard
-    final destination = ProfilePage();
+    final destination = DashboardPage();
 
     Navigator.of(
       context,

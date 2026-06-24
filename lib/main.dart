@@ -1,13 +1,10 @@
-// ===========================================================
-// FICHIER : main.dart
-// CHEMIN  : lib/main.dart
-// ===========================================================
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:schooltrack/core/router/app_repositories.dart';
+import 'package:schooltrack/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 
 // ── Auth ───────────────────────────────────────────────────
 import 'features/auth/data/repositories/auth_repository_impl.dart';
@@ -46,6 +43,11 @@ class SchoolTrackApp extends StatelessWidget {
         // ── 1. Auth ────────────────────────────────────────
         BlocProvider<AuthBloc>(
           create: (_) => AuthBloc(repository: AuthRepositoryImpl()),
+        ),
+
+        // Fournit DashboardBloc à toute l'application
+        BlocProvider<DashboardBloc>(
+          create: (_) => DashboardBloc(getDashboardStats: getDashboardStats),
         ),
 
         // ── 2. Students ────────────────────────────────────
