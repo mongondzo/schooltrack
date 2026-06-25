@@ -4,7 +4,6 @@ import 'package:schooltrack/core/services/connectivity_service.dart';
 import 'package:schooltrack/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:schooltrack/features/auth/presentation/pages/login_page.dart';
 import 'package:schooltrack/features/auth/presentation/pages/no_internet_page.dart';
-import 'package:schooltrack/features/auth/presentation/pages/profile_page.dart';
 import 'package:schooltrack/features/dashboard/presentation/pages/dashboard_page.dart';
 
 class SplashPage extends StatefulWidget {

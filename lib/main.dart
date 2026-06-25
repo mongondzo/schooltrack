@@ -6,6 +6,10 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:schooltrack/core/router/app_repositories.dart';
 import 'package:schooltrack/features/classes/presentation/bloc/class_bloc.dart';
 import 'package:schooltrack/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:schooltrack/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:schooltrack/features/schedules/data/datasources/schedule_remote_datasource.dart';
+import 'package:schooltrack/features/schedules/data/repositories/schedule_repository_impl.dart';
+import 'package:schooltrack/features/schedules/presentation/bloc/schedule_bloc.dart';
 
 // ── Auth ───────────────────────────────────────────────────
 import 'features/auth/data/repositories/auth_repository_impl.dart';
@@ -54,6 +58,17 @@ class SchoolTrackApp extends StatelessWidget {
         // ── 2. Students ────────────────────────────────────
         BlocProvider<ClassBloc>(
           create: (_) => ClassBloc(repository: classRepository),
+        ),
+
+        // ── 3. Emplois du temps ────────────────────────────────────
+        BlocProvider<ScheduleBloc>(
+          create: (_) => ScheduleBloc(
+            repository: ScheduleRepositoryImpl(ScheduleRemoteDataSource()),
+          ),
+        ),
+
+        BlocProvider<ProfileBloc>(
+          create: (_) => ProfileBloc(repository: profileRepository),
         ),
 
         // ── 3. Classes ─────────────────────────────────────
@@ -134,7 +149,7 @@ class SchoolTrackApp extends StatelessWidget {
             ),
           ),
         ), //  ferme ThemeData
-        // ── Premier écran
+        // Premier écran
         home: const SplashPage(), //  dans MaterialApp
       ),
     );
