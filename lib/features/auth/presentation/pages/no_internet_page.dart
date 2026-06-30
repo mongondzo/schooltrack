@@ -101,7 +101,7 @@ class _NoInternetPageState extends State<NoInternetPage> {
 
               // ── Description ───────────────────────────────
               Text(
-                'SchoolTrack nécessite une connexion\nInternet pour fonctionner.\n\nVérifiez votre WiFi ou vos données mobiles.',
+                'BolandiApp nécessite une connexion\nInternet pour fonctionner.\n\nVérifiez votre WiFi ou vos données mobiles.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15,

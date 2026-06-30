@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schooltrack/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:schooltrack/features/auth/presentation/pages/profile_page.dart';
 import 'package:schooltrack/features/auth/presentation/widgets/google_sign_in_button.dart';
 import 'package:schooltrack/features/dashboard/presentation/pages/dashboard_page.dart';
 
@@ -146,7 +145,7 @@ Widget _buildHeader(Size size) {
 
           // Nom de l'app
           Text(
-            'SchoolTrack',
+            'BolandiApp',
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w700,
@@ -191,7 +190,7 @@ Widget _buildLoginForm(BuildContext context) {
         const SizedBox(height: 8),
 
         Text(
-          'Connectez-vous à votre compte SchoolTrack',
+          'Connectez-vous à votre compte BolandiApp',
           style: TextStyle(fontSize: 14, color: const Color(0xFF64748B)),
         ),
 

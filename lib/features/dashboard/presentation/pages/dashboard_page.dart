@@ -13,6 +13,10 @@ import 'package:schooltrack/features/dashboard/presentation/widgets/stats_skelet
 import 'package:schooltrack/features/grades/presentation/pages/grades_page.dart';
 import 'package:schooltrack/features/notifications/presentation/navigation/notification_navigation.dart';
 import 'package:schooltrack/features/notifications/presentation/widgets/notifications_count_card.dart';
+
+import 'package:schooltrack/features/parents/presentation/pages/parents_page.dart';
+import 'package:schooltrack/features/parents/presentation/widgets/parents_stat_card.dart';
+
 import 'package:schooltrack/features/schedules/presentation/pages/schedules_page.dart';
 import 'package:schooltrack/features/schedules/presentation/widgets/schedule_stat_card.dart';
 import 'package:schooltrack/features/students/presentation/pages/add_student_page.dart';
@@ -99,7 +103,7 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
         const SizedBox(width: 10),
         Text(
-          'SchoolTrack',
+          'BolandiApp',
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w700,
@@ -376,6 +380,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     NotificationsCountCard(
                       onTap: () => openNotificationsPage(context),
                     ),
+
                     // StatCard(
                     //   title: 'Notifications',
                     //   value: '${stats.totalNotifications}',
@@ -394,6 +399,33 @@ class _DashboardPageState extends State<DashboardPage> {
                     //     );
                     //   },
                     // ),
+
+                    //carte parent
+                    ParentsStatCard(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => ParentsPage()),
+                        );
+                      },
+                    ),
+                    StatCard(
+                      title: 'matieres',
+                      value: '${stats.totalNotifications}',
+                      icon: Icons.notifications_rounded,
+                      color: const Color(0xFF7C3AED),
+                      iconBgColor: const Color(0xFF6D28D9),
+                      subtitle: 'Non lues',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) =>
+                                GradesPage(repository: gradeRepository),
+                          ),
+                        );
+                      },
+                    ),
 
                     // StatCard(
                     //   title: 'Matieres',

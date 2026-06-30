@@ -48,12 +48,12 @@ class GoogleSignInButton extends StatelessWidget {
                     width: 30,
                     height: 40,
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 11),
 
                   Text(
                     'Se connecter avec Google',
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 13,
                       fontWeight: FontWeight.w500,
                       color: const Color(0xFF374151),
                     ),
