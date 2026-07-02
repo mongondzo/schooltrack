@@ -7,14 +7,11 @@ import '../widgets/attendance_form.dart';
 
 const _primaryColor = Color(0xFF2563EB);
 
-/// -----------------------------------------------------------------------
-/// EditAttendancePage
-/// -----------------------------------------------------------------------
 /// Page permettant de modifier une présence existante.
 ///
 /// Les champs du formulaire sont pré-remplis avec les valeurs actuelles
 /// de [attendance], grâce aux paramètres `initial...` de AttendanceForm.
-/// -----------------------------------------------------------------------
+
 class EditAttendancePage extends StatelessWidget {
   final AttendanceEntity attendance;
 
@@ -36,27 +33,30 @@ class EditAttendancePage extends StatelessWidget {
           initialDate: attendance.date,
           initialStatus: attendance.status,
           submitButtonLabel: 'Enregistrer les modifications',
-          onSubmit: ({
-            required studentName,
-            required classe,
-            required date,
-            required status,
-          }) {
-            // On conserve l'id, le studentId et la date de création
-            // d'origine ; seuls les autres champs sont mis à jour.
-            final updatedAttendance = AttendanceEntity(
-              id: attendance.id,
-              studentId: attendance.studentId,
-              studentName: studentName,
-              classe: classe,
-              date: date,
-              status: status,
-              createdAt: attendance.createdAt,
-            );
+          onSubmit:
+              ({
+                required studentName,
+                required classe,
+                required date,
+                required status,
+              }) {
+                // On conserve l'id, le studentId et la date de création
+                // d'origine ; seuls les autres champs sont mis à jour.
+                final updatedAttendance = AttendanceEntity(
+                  id: attendance.id,
+                  studentId: attendance.studentId,
+                  studentName: studentName,
+                  classe: classe,
+                  date: date,
+                  status: status,
+                  createdAt: attendance.createdAt,
+                );
 
-            context.read<AttendanceBloc>().add(UpdateAttendance(updatedAttendance));
-            Navigator.pop(context);
-          },
+                context.read<AttendanceBloc>().add(
+                  UpdateAttendance(updatedAttendance),
+                );
+                Navigator.pop(context);
+              },
         ),
       ),
     );

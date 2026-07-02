@@ -3,9 +3,7 @@ import '../../domain/repositories/attendance_repository.dart';
 import 'attendance_event.dart';
 import 'attendance_state.dart';
 
-/// -----------------------------------------------------------------------
 /// AttendanceBloc
-/// -----------------------------------------------------------------------
 /// Le "cerveau" de la fonctionnalité Attendance côté Presentation.
 ///
 /// Il reçoit des événements (LoadAttendance, AddAttendance, ...), appelle
@@ -14,7 +12,6 @@ import 'attendance_state.dart';
 ///
 /// Le bloc ne contient AUCUNE logique Firestore : tout est délégué au
 /// repository, ce qui garde le bloc simple et testable.
-/// -----------------------------------------------------------------------
 class AttendanceBloc extends Bloc<AttendanceEvent, AttendanceState> {
   final AttendanceRepository repository;
 

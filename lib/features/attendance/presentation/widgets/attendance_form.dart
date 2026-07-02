@@ -3,19 +3,14 @@ import '../../domain/entities/attendance_entity.dart';
 
 const _primaryColor = Color(0xFF2563EB);
 
-/// -----------------------------------------------------------------------
-/// AttendanceForm
-/// -----------------------------------------------------------------------
 /// Formulaire réutilisable pour AJOUTER ou MODIFIER une présence.
-///
+
 /// - Pour un AJOUT : ne pas fournir les paramètres `initial...`.
 /// - Pour une MODIFICATION : fournir les valeurs actuelles via
 ///   `initialStudentName`, `initialClasse`, `initialDate`, `initialStatus`.
-///
 /// `onSubmit` n'est appelé que si le formulaire est valide (élève et
 /// classe renseignés). La date et le statut ont toujours une valeur
 /// par défaut (aujourd'hui / présent).
-/// -----------------------------------------------------------------------
 class AttendanceForm extends StatefulWidget {
   final String? initialStudentName;
   final String? initialClasse;
@@ -27,7 +22,8 @@ class AttendanceForm extends StatefulWidget {
     required String classe,
     required DateTime date,
     required AttendanceStatus status,
-  }) onSubmit;
+  })
+  onSubmit;
 
   const AttendanceForm({
     super.key,
@@ -55,8 +51,9 @@ class _AttendanceFormState extends State<AttendanceForm> {
   @override
   void initState() {
     super.initState();
-    _studentNameController =
-        TextEditingController(text: widget.initialStudentName ?? '');
+    _studentNameController = TextEditingController(
+      text: widget.initialStudentName ?? '',
+    );
     _classeController = TextEditingController(text: widget.initialClasse ?? '');
     _selectedDate = widget.initialDate ?? DateTime.now();
     _selectedStatus = widget.initialStatus ?? AttendanceStatus.present;

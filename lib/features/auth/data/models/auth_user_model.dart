@@ -1,7 +1,3 @@
-// ===========================================================
-// FICHIER : auth_user_model.dart
-// CHEMIN  : features/auth/data/models/auth_user_model.dart
-//
 // RÔLE : Version "Data" de l'entité AuthUserEntity.
 // Sait se convertir depuis/vers Firestore ET depuis
 // un compte Firebase Auth (User).
@@ -9,7 +5,6 @@
 // Diagram :
 //   Firebase Auth User  ──→  AuthUserModel  ──→  AuthUserEntity
 //   Firestore Map       ──→  AuthUserModel  ──→  AuthUserEntity
-// ===========================================================
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,16 +23,12 @@ class AuthUserModel extends AuthUserEntity {
     required super.createdAt,
   });
 
-  // ──────────────────────────────────────────────────────────
-  // fromFirestore() — Document Firestore → AuthUserModel
-  //
   // Utilisé quand on récupère le profil d'un utilisateur
   // déjà existant depuis users/{uid}.
   //
   // Exemple :
   //   final doc = await firestore.collection('users').doc(uid).get();
   //   final user = AuthUserModel.fromFirestore(doc);
-  // ──────────────────────────────────────────────────────────
   factory AuthUserModel.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
 
@@ -78,12 +69,10 @@ class AuthUserModel extends AuthUserEntity {
     );
   }
 
-  // ──────────────────────────────────────────────────────────
   // toMap() — AuthUserModel → Map pour Firestore
   //
   // Utilisé pour créer ou mettre à jour le document
   // users/{uid} dans Firestore.
-  // ──────────────────────────────────────────────────────────
   Map<String, dynamic> toMap() {
     return {
       // On inclut uid dans les champs pour faciliter les
@@ -99,12 +88,10 @@ class AuthUserModel extends AuthUserEntity {
     };
   }
 
-  // ──────────────────────────────────────────────────────────
   // fromMap() — Map brute → AuthUserModel
   //
   // Utile si vous avez déjà les données sous forme de Map
   // sans avoir le DocumentSnapshot de Firestore.
-  // ──────────────────────────────────────────────────────────
   factory AuthUserModel.fromMap(Map<String, dynamic> map, String id) {
     return AuthUserModel(
       uid: id,

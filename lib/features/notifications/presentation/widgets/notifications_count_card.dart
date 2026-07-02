@@ -62,8 +62,6 @@ class _NotificationsCountCardState extends State<NotificationsCountCard> {
                   color: Colors.white70,
                   size: 18,
                 ),
-                SizedBox(width: 6),
-                Text('Notifications', style: TextStyle(color: Colors.white70)),
               ],
             ),
             const SizedBox(height: 8),

@@ -1,13 +1,10 @@
 import '../../domain/entities/attendance_entity.dart';
 
-/// -----------------------------------------------------------------------
 /// AttendanceState
-/// -----------------------------------------------------------------------
 /// Représente ce que l'UI doit afficher à un instant donné.
 /// L'AttendanceBloc émet un nouvel état chaque fois que la situation
 /// change, et les widgets (via BlocBuilder) se reconstruisent
 /// automatiquement.
-/// -----------------------------------------------------------------------
 abstract class AttendanceState {}
 
 /// État de départ, avant le premier chargement.

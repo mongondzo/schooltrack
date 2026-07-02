@@ -6,11 +6,7 @@ import 'edit_attendance_page.dart';
 
 const _primaryColor = Color(0xFF2563EB);
 
-/// -----------------------------------------------------------------------
-/// AttendanceDetailsPage
-/// -----------------------------------------------------------------------
 /// Page affichant tous les détails d'une présence.
-/// -----------------------------------------------------------------------
 class AttendanceDetailsPage extends StatelessWidget {
   final AttendanceEntity attendance;
 

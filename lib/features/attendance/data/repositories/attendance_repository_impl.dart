@@ -3,15 +3,11 @@ import '../../domain/repositories/attendance_repository.dart';
 import '../datasources/attendance_remote_datasource.dart';
 import '../models/attendance_model.dart';
 
-/// -----------------------------------------------------------------------
-/// AttendanceRepositoryImpl
-/// -----------------------------------------------------------------------
 /// Implémentation concrète de AttendanceRepository (l'interface du Domain).
 ///
 /// Son rôle : faire le pont entre le Domain (qui ne connaît que des
 /// AttendanceEntity) et la Data (qui parle Firestore via
 /// AttendanceRemoteDataSource).
-/// -----------------------------------------------------------------------
 class AttendanceRepositoryImpl implements AttendanceRepository {
   final AttendanceRemoteDataSource remoteDataSource;
 

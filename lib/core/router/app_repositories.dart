@@ -13,11 +13,8 @@ import 'package:schooltrack/features/grades/domain/repositories/grade_repository
 import 'package:schooltrack/features/notifications/data/datasources/notification_remote_datasource.dart';
 import 'package:schooltrack/features/notifications/data/repositories/notification_repository_impl.dart';
 import 'package:schooltrack/features/notifications/domain/repositories/notification_repository.dart';
-<<<<<<< HEAD
-=======
 import 'package:schooltrack/features/parents/data/datasources/parent_remote_datasource.dart';
 import 'package:schooltrack/features/parents/data/repositories/parent_repository_impl.dart';
->>>>>>> parentApp
 import 'package:schooltrack/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:schooltrack/features/profile/data/repositories/profile_repository_impl.dart';
 import 'package:schooltrack/features/schedules/data/datasources/schedule_remote_datasource.dart';
@@ -60,8 +57,7 @@ final profileRemoteDataSource = ProfileRemoteDataSourceImpl();
 final profileRepository = ProfileRepositoryImpl(
   remoteDataSource: profileRemoteDataSource,
 );
-<<<<<<< HEAD
-=======
+
 
 //repository de la fonctionnaliter parent
 final parentRemoteDataSource = ParentRemoteDataSourceImpl();
@@ -71,4 +67,3 @@ final parentRepository = ParentRepositoryImpl(
 );
 
 //repository de la fonctionaliter de dashboarparent
->>>>>>> parentApp

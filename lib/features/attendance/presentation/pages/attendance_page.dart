@@ -13,18 +13,6 @@ import 'attendance_details_page.dart';
 
 const _primaryColor = Color(0xFF2563EB);
 
-/// -----------------------------------------------------------------------
-/// AttendancePage
-/// -----------------------------------------------------------------------
-/// Page principale de la fonctionnalité Attendance.
-///
-/// C'est ICI que l'AttendanceBloc est créé et fourni (BlocProvider) à tout
-/// l'arbre de widgets : la page elle-même, et toutes les pages poussées
-/// par-dessus (Add/Edit/Details), qui réutilisent le même bloc.
-///
-/// `repository` doit être l'implémentation concrète de AttendanceRepository
-/// fournie par la couche Data (AttendanceRepositoryImpl).
-/// -----------------------------------------------------------------------
 class AttendancePage extends StatelessWidget {
   final AttendanceRepository repository;
 
@@ -63,12 +51,8 @@ class _AttendanceViewState extends State<_AttendanceView> {
   /// Filtre simple, en mémoire : recherche par élève + filtre par classe.
   List<AttendanceEntity> _filter(List<AttendanceEntity> list) {
     return list.where((a) {
-<<<<<<< HEAD
-      final matchesQuery = _query.trim().isEmpty ||
-=======
       final matchesQuery =
           _query.trim().isEmpty ||
->>>>>>> parentApp
           a.studentName.toLowerCase().contains(_query.toLowerCase());
       final matchesClasse =
           _selectedClasse == 'Toutes' || a.classe == _selectedClasse;
@@ -81,15 +65,8 @@ class _AttendanceViewState extends State<_AttendanceView> {
     Navigator.push(
       context,
       MaterialPageRoute(
-<<<<<<< HEAD
-        builder: (_) => BlocProvider.value(
-          value: bloc,
-          child: const AddAttendancePage(),
-        ),
-=======
         builder: (_) =>
             BlocProvider.value(value: bloc, child: const AddAttendancePage()),
->>>>>>> parentApp
       ),
     );
   }
@@ -154,13 +131,12 @@ class _AttendanceViewState extends State<_AttendanceView> {
           ),
           TextButton(
             onPressed: () {
-<<<<<<< HEAD
-              context.read<AttendanceBloc>().add(DeleteAttendance(attendance.id));
-=======
               context.read<AttendanceBloc>().add(
                 DeleteAttendance(attendance.id),
               );
->>>>>>> parentApp
+              context.read<AttendanceBloc>().add(
+                DeleteAttendance(attendance.id),
+              );
               Navigator.pop(dialogContext);
             },
             child: const Text('Supprimer', style: TextStyle(color: Colors.red)),
@@ -269,16 +245,12 @@ class _AttendanceViewState extends State<_AttendanceView> {
                                         _goToEditPage(context, attendance),
                                     onDelete: () =>
                                         _confirmDelete(context, attendance),
-<<<<<<< HEAD
-                                    onMarkStatus: (status) =>
-                                        _markStatus(context, attendance, status),
-=======
+
                                     onMarkStatus: (status) => _markStatus(
                                       context,
                                       attendance,
                                       status,
                                     ),
->>>>>>> parentApp
                                   );
                                 },
                               ),

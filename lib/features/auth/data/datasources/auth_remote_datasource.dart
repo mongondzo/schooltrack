@@ -1,4 +1,3 @@
-// ===========================================================
 // FICHIER : auth_remote_datasource.dart
 // CHEMIN  : features/auth/data/datasources/auth_remote_datasource.dart
 //
@@ -35,11 +34,10 @@ class AuthRemoteDataSource {
     FirebaseAuth? firebaseAuth,
     FirebaseFirestore? firestore,
     GoogleSignIn? googleSignIn,
-  })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        _firestore = firestore ?? FirebaseFirestore.instance,
-        _googleSignIn = googleSignIn ?? GoogleSignIn();
+  }) : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
+       _firestore = firestore ?? FirebaseFirestore.instance,
+       _googleSignIn = googleSignIn ?? GoogleSignIn();
 
-  // ──────────────────────────────────────────────────────────
   // signInWithGoogle() — Connexion complète avec Google
   //
   // Étapes :
@@ -50,7 +48,6 @@ class AuthRemoteDataSource {
   //   5. Si non → crée le profil (première connexion)
   //   6. Si oui → récupère le profil existant
   //   7. Retourne l'utilisateur prêt à l'emploi
-  // ──────────────────────────────────────────────────────────
   Future<AuthUserModel> signInWithGoogle() async {
     // ── Étape 1 : Ouvre le sélecteur de compte Google ───────
     final GoogleSignInAccount? googleAccount = await _googleSignIn.signIn();
@@ -72,8 +69,8 @@ class AuthRemoteDataSource {
     );
 
     // ── Étape 4 : Connecte l'utilisateur dans Firebase Auth ─
-    final UserCredential userCredential =
-        await _firebaseAuth.signInWithCredential(credential);
+    final UserCredential userCredential = await _firebaseAuth
+        .signInWithCredential(credential);
 
     final User? firebaseUser = userCredential.user;
 
@@ -98,7 +95,7 @@ class AuthRemoteDataSource {
     final newUser = AuthUserModel.fromFirebaseUser(
       firebaseUser,
       role: 'admin', // Rôle par défaut à la première connexion
-      schoolId: '',  // À remplir plus tard dans les paramètres
+      schoolId: '', // À remplir plus tard dans les paramètres
     );
 
     // ── Étape 7 : Sauvegarde le profil dans Firestore ───────
@@ -173,8 +170,7 @@ class AuthRemoteDataSource {
   // ── Lecture : récupère un profil utilisateur ─────────────
   // Retourne null si le document n'existe pas encore
   Future<AuthUserModel?> _getUserFromFirestore(String uid) async {
-    final doc =
-        await _firestore.collection(_usersCollection).doc(uid).get();
+    final doc = await _firestore.collection(_usersCollection).doc(uid).get();
 
     // .exists vérifie que le document a bien été trouvé
     if (!doc.exists || doc.data() == null) return null;

@@ -1,12 +1,8 @@
-/// -----------------------------------------------------------------------
-/// AttendanceStatus
-/// -----------------------------------------------------------------------
 /// Les 3 statuts possibles pour une présence.
 ///
 /// Chaque valeur transporte :
 /// - `value`  : le texte enregistré dans Firestore (stable, ne pas traduire)
 /// - `label`  : le texte affiché à l'utilisateur (en français)
-/// -----------------------------------------------------------------------
 enum AttendanceStatus {
   present('present', 'Présent'),
   absent('absent', 'Absent'),
@@ -27,15 +23,12 @@ enum AttendanceStatus {
   }
 }
 
-/// -----------------------------------------------------------------------
 /// AttendanceEntity
-/// -----------------------------------------------------------------------
 /// Représente une "présence" du point de vue MÉTIER (Domain), indépendamment
 /// de Firestore ou de toute autre technologie de stockage.
 ///
 /// C'est cet objet que manipulent l'AttendanceBloc et toutes les pages
 /// (Presentation).
-/// -----------------------------------------------------------------------
 class AttendanceEntity {
   final String id;
   final String studentId;

@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/attendance_entity.dart';
 
-/// -----------------------------------------------------------------------
-/// AttendanceCard
-/// -----------------------------------------------------------------------
 /// Carte affichant le résumé d'une présence dans la liste (AttendancePage) :
 /// nom de l'élève, classe, statut (couleur + icône) et date.
 ///
 /// Le bouton "⋮" ouvre un menu regroupant toutes les actions possibles :
 /// marquer présent / absent / retard, modifier, supprimer.
-/// -----------------------------------------------------------------------
 class AttendanceCard extends StatelessWidget {
   final AttendanceEntity attendance;
   final VoidCallback onTap;

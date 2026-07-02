@@ -1,16 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../domain/entities/attendance_entity.dart';
 
-/// -----------------------------------------------------------------------
-/// AttendanceModel
-/// -----------------------------------------------------------------------
 /// Version "Data" de AttendanceEntity : elle sait se transformer
 /// depuis/vers un Map (le format utilisé par Firestore).
 ///
 /// AttendanceModel HÉRITE de AttendanceEntity : partout où une
 /// AttendanceEntity est attendue (Domain, Presentation), une
 /// AttendanceModel peut être utilisée directement.
-/// -----------------------------------------------------------------------
 class AttendanceModel extends AttendanceEntity {
   const AttendanceModel({
     required super.id,

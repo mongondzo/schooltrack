@@ -72,16 +72,6 @@ class SchoolTrackApp extends StatelessWidget {
           create: (_) => ProfileBloc(repository: profileRepository),
         ),
 
-        // ── 3. Classes ─────────────────────────────────────
-        // BlocProvider<ClassBloc>(
-        //   create: (context) => ClassBloc(
-        //     authBloc: context.read<AuthBloc>(),
-        //     repository: ClassRepositoryImpl(
-        //       dataSource: ClassRemoteDataSourceImpl(),
-        //     ),
-        //   ),
-        // ),
-
         // ── 4. profil
         BlocProvider<ProfileBloc>(
           create: (_) => ProfileBloc(repository: profileRepository),
@@ -93,10 +83,10 @@ class SchoolTrackApp extends StatelessWidget {
       ],
 
       child: MaterialApp(
-        title: 'SchoolTrack',
+        title: 'BolandiApp',
         debugShowCheckedModeBanner: false,
 
-        // ── Thème Material 3 ──────────────────────────────
+        // ── Thème Material 3
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(

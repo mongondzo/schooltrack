@@ -1,23 +1,17 @@
-// ===========================================================
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:schooltrack/features/auth/domain/entities/auth_user_entity.dart';
 import 'package:schooltrack/features/auth/data/models/auth_user_model.dart';
 
-// ──────────────────────────────────────────────────────────
 // Contrat (interface)
-// ──────────────────────────────────────────────────────────
 abstract class AuthRepository {
   Future<AuthUserEntity> signInWithGoogle();
   Future<AuthUserEntity?> getCurrentUser();
   Future<void> signOut();
 }
 
-// ──────────────────────────────────────────────────────────
 // Implémentation concrète
-// ──────────────────────────────────────────────────────────
 class AuthRepositoryImpl implements AuthRepository {
   // Services Firebase
   final FirebaseAuth _firebaseAuth;
@@ -36,9 +30,7 @@ class AuthRepositoryImpl implements AuthRepository {
        _firestore = firestore ?? FirebaseFirestore.instance,
        _googleSignIn = googleSignIn ?? GoogleSignIn();
 
-  // ──────────────────────────────────────────────────────────
   // Connexion avec Google
-  // ──────────────────────────────────────────────────────────
   @override
   Future<AuthUserEntity> signInWithGoogle() async {
     // Étape 1 : Ouvrir le sélecteur de compte Google
@@ -78,9 +70,7 @@ class AuthRepositoryImpl implements AuthRepository {
     return userModel;
   }
 
-  // ──────────────────────────────────────────────────────────
   // Vérifie si quelqu'un est connecté
-  // ──────────────────────────────────────────────────────────
   @override
   Future<AuthUserEntity?> getCurrentUser() async {
     // Vérifie la session Firebase

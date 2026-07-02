@@ -1,11 +1,8 @@
 import '../../domain/entities/attendance_entity.dart';
 
-/// -----------------------------------------------------------------------
 /// AttendanceEvent
-/// -----------------------------------------------------------------------
 /// Représente toutes les actions que l'UI peut envoyer à l'AttendanceBloc,
 /// via `context.read<AttendanceBloc>().add(...)`.
-/// -----------------------------------------------------------------------
 abstract class AttendanceEvent {}
 
 /// Demande de charger (ou recharger) la liste de toutes les présences.
